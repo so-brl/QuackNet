@@ -28,6 +28,11 @@ php -S 0.0.0.0:8000 -t public
 ```
 puis accéder à l'address : 
 http://127.0.0.1:8000/
+### La barre d'outils Web Debug: Debugging Dream
+L' une des fonctionnalités étonnantes de Symfony est la barre d'outils 
+de débogage Web: une barre qui affiche une énorme quantité d'informations 
+e débogage en bas de votre page pendant le développement. Tout cela est
+ inclus dans la boîte en utilisant un pack Symfony appelé ``symfony/profiler-pack``.
 
 ## Bases de données et Doctrine ORM
 #### Doctrine ORM
