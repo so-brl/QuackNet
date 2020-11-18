@@ -107,3 +107,16 @@ Il est temps d'enregistrer un objet dans la base de données! Créons un nouveau
 php bin/console make:controller QuackController
 ````
 
+## Sécuriser l’interface d’administration
+https://symfony.com/doc/current/the-fast-track/fr/15-security.html#configuring-the-security-authentication
+
+Comme pour Twig, le composant de sécurité est déjà installé par des
+ dépendances transitives. Ajoutons-le explicitement au fichier ``composer.json`` du projet :
+ ````
+composer req security
+ ````
+### Création d'un super Admin
+ ````
+php bin/console make:user Admin
+ ````
+#### Définir une entité User
