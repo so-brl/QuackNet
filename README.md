@@ -56,6 +56,11 @@ https://symfony.com/doc/current/doctrine.html#creating-an-entity-class
 ````
 php bin/console make:entity
 ````
+
+###Créer la home 
+````
+php bin/console make:controller HomeController
+````
 ### Créer les vues associè a l'entité 
 **Cela créé aussi un controller et les vues associés
 ````
