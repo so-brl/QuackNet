@@ -4,11 +4,13 @@ namespace App\Entity;
 
 use App\Repository\DuckRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=DuckRepository::class)
  */
-class Duck
+class Duck implements UserInterface
 {
     /**
      * @ORM\Id
@@ -38,9 +40,19 @@ class Duck
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
     private $password;
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+//    /**
+//     * @ORM\OneToMany(targetEntity="App\Entity\Quack", mappedBy="author")
+//     */
+//    private $quacks;
+
 
     public function getId(): ?int
     {
@@ -106,4 +118,70 @@ class Duck
 
         return $this;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUsername(): string
+    {
+        return $this->duckname;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+//    public function __toString(): string
+//    {
+//        return $this->duckname;
+//    }
+
+//    /**
+//     * @return mixed
+//     */
+//    public function getQuacks()
+//    {
+//        return $this->quacks;
+//    }
+//
+//    /**
+//     * @param mixed $quacks
+//     */
+//    public function setQuacks($quacks): void
+//    {
+//        $this->quacks = $quacks;
+//    }
 }

@@ -119,4 +119,20 @@ composer req security
  ````
 php bin/console make:user Admin
  ````
+Définir un mode de passe encodé pour l'admin : 
+ ````
+php bin/console security:encode-password
+
+$argon2id$v=19$m=65536,t=4,p=1$ZlJOR1pmYVdzS1A3TWFUQg$kISi0v3MjRIRTd44DP5wncijhC6JRf3fN+IPYS8LBFA
+ ````
+
 #### Définir une entité User
+
+
+####Configurer le système d’authentification
+ ````
+php bin/console make:auth
+ ````
+Sélectionnez 1 pour générer une classe d’authentification pour le formulaire 
+de connexion, nommez la classe d’authentification AppAuthenticator, 
+le contrôleur SecurityController et créez une URL /logout (yes).
