@@ -148,3 +148,78 @@ https://symfony.com/doc/current/security/remember_me.html
 ````
  composer require symfony/asset
 ````
+
+#Encore
+(Voir https://symfony.com/doc/current/frontend/encore/installation.html)
+
+``composer require symfony/webpack-encore-bundle``
+
+``npm install``
+
+Pour les images , dans le ``webpack.config.js`` ajouter : 
+```
+.copyFiles({
+        from: './assets/images',
+
+        // optional target path, relative to the output dir
+        //to: 'images/[path][name].[ext]',
+
+        // if versioning is enabled, add the file hash too
+        //to: 'images/[path][name].[hash:8].[ext]',
+
+        // only copy files matching this pattern
+        pattern: /\.(png|jpg|jpeg|svg|gif|ico)$/
+    })
+
+```
+Pour compiler les assets une fois:
+``npm run dev``
+
+Pour "écouter" le changement d'assets: ``npm run watch``
+
+Penser à relancer encore à chaque fois que le fichier ``webpack.config.js`` a été modifié.
+
+
+Ajouter des images à un template: 
+{# assets/images/logo.png was copied to public/build/logo.png #}
+<img src="{{ asset('build/logo.png') }}" alt="ACME logo">
+
+### Installer sass 
+``
+npm add sass-loader@^8.0.0 node-sass --dev
+``
+dans le ``webpack.config.js`` décommenter ``.enableSassLoader()``
+
+mofifier ``app.js``
+````
+/*
+ * Welcome to your app's main JavaScript file!
+ *
+ * We recommend including the built version of this JavaScript file
+ * (and its CSS file) in your base layout (base.html.twig).
+ */
+
+// any CSS you import will output into a single css file (app.css in this case)
+import './styles/styles.scss';
+// import bsCustomFileInput from 'bs-custom-file-input';
+
+// Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
+// import $ from 'jquery';
+
+// bsCustomFileInput.init();
+
+console.log('Hello Webpack Encore! Edit me in assets/app.js');
+
+
+// loads the jquery package from node_modules
+// var $ = require('jquery');
+
+// import the function from test.js (the .js extension is optional)
+// ./ (or ../) means to look for a local file
+//     var test = require('./test');
+//     $(document).ready(function() {
+//     $('body').prepend('<h1>'+test('Canard boiteux')+'</h1>');
+// });
+````
+
+si ``Error: Node Sass version 5.0.0 is incompatible with ^4.0.0`` modifier dans package.json ``"sass-loader": "^10.0.5"``
