@@ -13,8 +13,8 @@
                 <th>Lastname</th>
                 <th>Duckname</th>
                 <th>Email</th>
-                <th>Password</th>
-                <th>Roles</th>
+{#                <th>Password</th>#}
+{#                <th>Roles</th>#}
                 <th>actions</th>
             </tr>
         </thead>
@@ -26,7 +26,7 @@
                 <td>{{ duck.lastname }}</td>
                 <td>{{ duck.duckname }}</td>
                 <td>{{ duck.email }}</td>
-                <td>{{ duck.password }}</td>
+{#                <td>{{ duck.password }}</td>#}
 {#                <td>{{ duck.roles ? duck.roles|json_encode : '' }}</td>#}
                 <td>
                     <a href="{{ path('duck_show', {'id': duck.id}) }}">show</a>

@@ -134,10 +134,12 @@ $argon2id$v=19$m=65536,t=4,p=1$ZlJOR1pmYVdzS1A3TWFUQg$kISi0v3MjRIRTd44DP5wncijhC
 #### Définir une entité User
 
 
-####Configurer le système d’authentification
+#### Configurer le système d’authentification
  ````
 php bin/console make:auth
  ````
 Sélectionnez 1 pour générer une classe d’authentification pour le formulaire 
 de connexion, nommez la classe d’authentification AppAuthenticator, 
 le contrôleur SecurityController et créez une URL /logout (yes).
+#### Comment ajouter la fonctionnalité de connexion «Se souvenir de moi»
+https://symfony.com/doc/current/security/remember_me.html
