@@ -38,5 +38,5 @@ security:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/profile, roles: ROLE_USER }
          - { path: '^/register', roles: [ IS_ANONYMOUS ] }
-         - { path: '^/quack/', roles: [ IS_AUTHENTICATED_FULLY ] }
+         - { path: '^/login', roles: [  IS_ANONYMOUS ] }
          - { path: '^/duck', roles: [ IS_AUTHENTICATED_FULLY ] }
