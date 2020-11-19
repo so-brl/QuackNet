@@ -100,34 +100,34 @@ class DuckController extends AbstractController
 
         return $this->redirectToRoute('duck_index');
     }
-    /**
-     * @Route("/register", name="duck_register", methods={"GET","POST"})
-     */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
-    {
-        $duck = new Duck();
-        $form = $this->createForm(DuckType::class, $duck);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $duck->setPassword(
-                $passwordEncoder->encodePassword(
-                    $duck,
-                    $form->get('password')->getData()
-                )
-            );
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($duck);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('duck_index');
-        }
-
-        return $this->render('duck/register.html.twig', [
-            'duck' => $duck,
-            'form' => $form->createView(),
-        ]);
-    }
+//    /**
+//     * @Route("/register", name="duck_register", methods={"GET","POST"})
+//     */
+//    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+//    {
+//        $duck = new Duck();
+//        $form = $this->createForm(DuckType::class, $duck);
+//
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//
+//            $duck->setPassword(
+//                $passwordEncoder->encodePassword(
+//                    $duck,
+//                    $form->get('password')->getData()
+//                )
+//            );
+//            $entityManager = $this->getDoctrine()->getManager();
+//            $entityManager->persist($duck);
+//            $entityManager->flush();
+//
+//            return $this->redirectToRoute('duck_index');
+//        }
+//
+//        return $this->render('duck/register.html.twig', [
+//            'duck' => $duck,
+//            'form' => $form->createView(),
+//        ]);
+//    }
 }

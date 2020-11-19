@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=DuckRepository::class)
+ * @UniqueEntity(fields={"duckname"}, message="There is already an account with this duckname")
  */
 class Duck implements UserInterface
 {
@@ -48,6 +49,11 @@ class Duck implements UserInterface
      * @ORM\Column(type="json")
      */
     private $roles = [];
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
 //    /**
 //     * @ORM\OneToMany(targetEntity="App\Entity\Quack", mappedBy="author")
 //     */
@@ -184,4 +190,16 @@ class Duck implements UserInterface
 //    {
 //        $this->quacks = $quacks;
 //    }
+
+public function isVerified(): bool
+{
+    return $this->isVerified;
+}
+
+public function setIsVerified(bool $isVerified): self
+{
+    $this->isVerified = $isVerified;
+
+    return $this;
+}
 }
