@@ -143,3 +143,8 @@ de connexion, nommez la classe d’authentification AppAuthenticator,
 le contrôleur SecurityController et créez une URL /logout (yes).
 #### Comment ajouter la fonctionnalité de connexion «Se souvenir de moi»
 https://symfony.com/doc/current/security/remember_me.html
+
+# Les assets 
+````
+ composer require symfony/asset
+````

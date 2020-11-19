@@ -27,6 +27,21 @@ class Quack
      */
     private $created_at;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $autheur;
+
+    /**
+     * @ORM\Column(type="blob", nullable=true)
+     */
+    private $photo;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $tags = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +67,42 @@ class Quack
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getAutheur(): ?string
+    {
+        return $this->autheur;
+    }
+
+    public function setAutheur(string $autheur): self
+    {
+        $this->autheur = $autheur;
+
+        return $this;
+    }
+
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto($photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getTags(): ?array
+    {
+        return $this->tags;
+    }
+
+    public function setTags(?array $tags): self
+    {
+        $this->tags = $tags;
 
         return $this;
     }

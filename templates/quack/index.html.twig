@@ -3,26 +3,33 @@
 {% block title %}Quack index{% endblock %}
 
 {% block body %}
-    <h1>Quack index</h1>
-
+<div class="container mt-5 mb-5">
+    <h1>Liste des Quacks</h1>
+    <div  class="row justify-content-end mb-5">
+        <a class = "btn btn-success" href="{{ path('quack_new') }}"><i class="fas fa-plus"></i> Ajouter un Quack</a>
+    </div>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Content</th>
-                <th>Created_at</th>
+                <th>Id :</th>
+                <th>Auteur :</th>
+                <th>Contenu :</th>
+                <th>Créé le :</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for quack in quacks %}
             <tr>
-                <td>{{ quack.id }}</td>
-                <td>{{ quack.content }}</td>
-                <td>{{ quack.createdAt ? quack.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td><p class = "badge badge-pill badge-primary">{{ quack.id }}</p></td>
+                <td>{{ quack.autheur }}</td>
+{#                <td>{{ quack.tags }}</td>#}
+
+                <td>{{ quack.content }}{{ quack.photo }}</td>
+                <td>{{ quack.createdAt ? quack.createdAt|date('d-m-y h:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('quack_show', {'id': quack.id}) }}">show</a>
-                    <a href="{{ path('quack_edit', {'id': quack.id}) }}">edit</a>
+                    <a  class = "btn btn-outline-info btn-sm" href="{{ path('quack_show', {'id': quack.id}) }}"><i class="far fa-eye"></i> Voir </a>
+                    <a class = "btn btn-outline-warning btn-sm" href="{{ path('quack_edit', {'id': quack.id}) }}"><i class="far fa-edit"></i> Editer</a>
                 </td>
             </tr>
         {% else %}
@@ -32,6 +39,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('quack_new') }}">Create new</a>
+</div>
 {% endblock %}
