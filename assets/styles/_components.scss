@@ -1,3 +1,15 @@
+
 body{
-  background-color: #B0413E;
+  background-color: #1a1a1a!important;
+
+}
+a{
+  color:rgba(255,255,255,.5);
+  &:hover{
+    color:white;
+    text-decoration: none;
+  }
+}
+label{
+  color:rgba(255,255,255,.5);
 }

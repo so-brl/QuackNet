@@ -1,10 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container-fluid navbar-brand bg-primary" style="height: 100vh; color: white">
-        <div class="container">
-            <p style=" color: white">QUACKNET</p>
-            <img src="{{ asset('build/duck-white.svg') }}" alt="quacknet-logo">
+    <div class="home container-fluid d-flex align-items-center  "  style="height: 80vh">
+        <div class="container " >
+            <div class=" d-flex flex-column home_identity justify-content-center align-items-center">
+                <div class="text-center mb-5">
+                    <img class="home_identity_logo mb-3" src="{{ asset('build/duck-white.svg') }}" alt="quacknet-logo">
+                    <h1 class="home_identity">QUACKNET</h1>
+                    <p class="home_identity">A votre tour de cancaner<span>*</span> dans la marre.</p>
+              <div class="d-flex justify-content-center mt-5">
+                  <a class="btn btn-primary" href="/register">   Je m'inscris</a>
+                  <a class="btn btn-primary" href="/login">Connexion</a>
+              </div>
+
+                </div>
+            </div>
+
+            <p class="text-center mb-5">
+                <small>* Faire courir des bruits de couloir et des bavardages malveillants. <br>Médire de quelqu'un en
+                    colportant des propos négatifs dans l'intention de nuire. <br>Expression synonyme de babiller ou
+                    jaser appartenant au langage familier. </small>
+            </p>
         </div>
 
     </div>
