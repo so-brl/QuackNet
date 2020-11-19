@@ -1,15 +1,35 @@
 
-body{
-  background-color: #1a1a1a!important;
+body {
+  background-color: #1a1a1a !important;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
 }
-a{
-  color:rgba(255,255,255,.5);
-  &:hover{
-    color:white;
+
+a {
+  color: rgba(255, 255, 255, .5);
+
+  &:hover {
+    color: #f8db1b !important;
     text-decoration: none;
   }
 }
-label{
-  color:rgba(255,255,255,.5);
+
+label {
+  color: rgba(255, 255, 255, .5);
+}
+
+.title-white {
+  color: rgba(255, 255, 255, .5);
+}
+
+.yellow-text {
+  color: #f8db1b;
+}
+
+.card {
+
+  border-radius: 0;
 }

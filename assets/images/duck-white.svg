@@ -3,8 +3,7 @@
 <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 640 480" style="enable-background:new 0 0 640 480;" xml:space="preserve">
 <style type="text/css">
-	.logo{fill:rgba(255,255,255,.2);}
-	.logo:hover{fill:#fffffff}
+	.logo{fill:rgba(248, 219, 27,.6);}
 </style>
 <path class="logo" d="M12.6,167.7C12.1,193.3,7.7,253,32.2,321c24.9,69.2,126.7,154.7,272.3,154.7c148,0,268.1-73,268.1-163
 	S452.5,149.8,304.5,149.8c-44.5,0-86.6,6.6-123.5,18.3c-46,12.4-66-9.8-75.8-19.7c-21.8-22.1-24.1-36-30.9-63.5
