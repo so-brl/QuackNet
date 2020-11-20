@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\DuckRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -54,10 +55,6 @@ class Duck implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
-//    /**
-//     * @ORM\OneToMany(targetEntity="App\Entity\Quack", mappedBy="author")
-//     */
-//    private $quacks;
 
 
     public function getId(): ?int
@@ -170,26 +167,6 @@ class Duck implements UserInterface
         // $this->plainPassword = null;
     }
 
-//    public function __toString(): string
-//    {
-//        return $this->duckname;
-//    }
-
-//    /**
-//     * @return mixed
-//     */
-//    public function getQuacks()
-//    {
-//        return $this->quacks;
-//    }
-//
-//    /**
-//     * @param mixed $quacks
-//     */
-//    public function setQuacks($quacks): void
-//    {
-//        $this->quacks = $quacks;
-//    }
 
 public function isVerified(): bool
 {

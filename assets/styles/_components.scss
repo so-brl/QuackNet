@@ -9,12 +9,12 @@ body {
 }
 
 a {
-  color: rgba(255, 255, 255, .5);
-
-  &:hover {
-    color: #f8db1b !important;
-    text-decoration: none;
-  }
+  //color: rgba(255, 255, 255, .5);
+  //
+  //&:hover {
+  //  color: #f8db1b !important;
+  //  text-decoration: none;
+  //}
 }
 
 label {
@@ -30,6 +30,10 @@ label {
 }
 
 .card {
-
+background-color: transparent;
   border-radius: 0;
+}
+.card-body{
+  background-color: white;
+
 }

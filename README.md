@@ -223,3 +223,11 @@ console.log('Hello Webpack Encore! Edit me in assets/app.js');
 ````
 
 si ``Error: Node Sass version 5.0.0 is incompatible with ^4.0.0`` modifier dans package.json ``"sass-loader": "^10.0.5"``
+
+## Conteneur de service
+Votre application regorge d'objets utiles: un objet «Mailer» peut vous aider à envoyer des e-mails tandis qu'un autre objet peut vous aider à enregistrer des éléments dans la base de données. Presque tout ce que votre application «fait» est en fait fait par l'un de ces objets. Et chaque fois que vous installez un nouveau bundle, vous avez accès à encore plus!
+
+Dans Symfony, ces objets utiles sont appelés services et chaque service vit dans un objet très spécial appelé le conteneur de services . Le conteneur vous permet de centraliser la façon dont les objets sont construits. Cela vous facilite la vie, favorise une architecture forte et est super rapide!
+
+### Créer uns ervice pour uploader des images 
+https://symfony.com/doc/current/controller/upload_file.html

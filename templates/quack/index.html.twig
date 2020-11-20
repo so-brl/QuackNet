@@ -3,37 +3,48 @@
 {% block title %}Quack index{% endblock %}
 
 {% block body %}
-<div class="container mt-5 mb-5"  >
-    <h1>Liste des Quacks</h1>
-    {% if app.user %}
-    <div  class="row justify-content-end mb-5">
-        <a class = "btn btn-success" href="{{ path('quack_new') }}"><i class="fas fa-plus"></i> Ajouter un Quack</a>
-    </div>
-    {% endif %}
-    <div class="d-flex justify-content-around">
-        {% for quack in quacks %}
-        <div class = "card text-white bg-primary mb-3 d-flex flex-column justify-content-between" style = "max-width: 20rem; min-width: 320px">
-            <div class = "card-header"></div>
-            <div class = "card-body">
-                <h4 class = "card-title">{{ quack.id }}</h4>
-                <p>{{ quack.photo }}</p>
-                <p class = "card-text">{{ quack.content }}</p>
-                <p><small>{{ quack.autheur }}</small></p>
-                <p><small>{{ quack.createdAt ? quack.createdAt|date('d-m-y h:i:s') : '' }}</small></p>
-                <div>
-                    <a  class = "" href="{{ path('quack_show', {'id': quack.id}) }}"><i class="far fa-eye"></i> Voir </a>
+    <div class="container mt-5 mb-5">
+        <h1>Liste des Quacks</h1>
+        {% if app.user %}
+            <div class="row justify-content-end mb-5">
+                <a class="btn btn-success" href="{{ path('quack_new') }}"><i class="fas fa-plus"></i> Ajouter un
+                    Quack</a>
+            </div>
+        {% endif %}
+        <div class="row">
+            {% for quack in quacks %}
+                <div class="card col-4 p-1">
+                    <div class="card-body m-1">
+
+                        <h4 class="card-title"> {{ quack.Auteur.duckname }}</h4>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="card-subtitle mb-2 text-muted">Infos sur le Duck à implémenter</h6>
+                            <span class = "badge badge-pill badge-primary" style="height: fit-content"> Tag </span>
+                            <small>{{ quack.createdAt ? quack.createdAt|date('d-m-y h:i:s') : '' }}</small>
+                        </div>
+
+                        <img class="d-block user-select-none pb-3 pt-3" width="100%" height="auto"
+                             src="/uploads/{{ quack.uploadFileName }}">
+                        <p class="card-text"> {{ quack.content }}</p>
+                        <div class="d-flex justify-content-end">
+                            <a class=lead" href="{{ path('quack_show', {'id': quack.id}) }}" class="card-link">Lire le
+                                Quack</a>
+                        </div>
+                    </div>
                     {% if app.user %}
-                        <a class = "" href="{{ path('quack_edit', {'id': quack.id}) }}"><i class="far fa-edit"></i> Editer</a>
+                        <div class="d-flex justify-content-end">
+                            <a class="" href="{{ path('quack_edit', {'id': quack.id}) }}">Modifier</a>
+                        </div>
                     {% endif %}
                 </div>
-            </div>
-        </div>
-        {% else %}
-            <div>
-                <p>no records found<p>
-            </div>
-        {% endfor %}
-    </div>
 
-</div>
+            {% else %}
+                <div>
+                    <p>no records found
+                    <p>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
 {% endblock %}

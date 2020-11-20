@@ -18,6 +18,8 @@ class DuckController extends AbstractController
 {
     /**
      * @Route("/", name="duck_index", methods={"GET"})
+     * @param DuckRepository $duckRepository
+     * @return Response
      */
     public function index(DuckRepository $duckRepository): Response
     {

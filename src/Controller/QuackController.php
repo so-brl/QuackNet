@@ -2,14 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\Duck;
 use App\Entity\Quack;
 use App\Form\QuackType;
 use App\Repository\QuackRepository;
+use App\Service\FileUploader;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 /**
  * @Route("/quack")
  */
@@ -17,9 +22,12 @@ class QuackController extends AbstractController
 {
     /**
      * @Route("/", name="quack_index", methods={"GET"})
+     * @param QuackRepository $quackRepository
+     * @return Response
      */
     public function index(QuackRepository $quackRepository): Response
     {
+
         return $this->render('quack/index.html.twig', [
             'quacks' => $quackRepository->findAll(),
         ]);
@@ -27,14 +35,26 @@ class QuackController extends AbstractController
 
     /**
      * @Route("/new", name="quack_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param $fileUploader
+     * @return Response
+     * @throws Exception
      */
-    public function new(Request $request): Response
+    public function new(Request $request, FileUploader $fileUploader): Response
     {
         $quack = new Quack();
+
         $form = $this->createForm(QuackType::class, $quack);
+        $quack ->setCreatedAt(new \DateTime());
+        $quack ->setAuteur($this->getUser());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $quackPicture = $form->get('uploadFileName')->getData();
+            if ($quackPicture) {
+                $uploadFileName = $fileUploader->uploadDuckImage($quackPicture);
+                $quack->setUploadFileName($uploadFileName);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($quack);
             $entityManager->flush();
@@ -53,8 +73,12 @@ class QuackController extends AbstractController
      */
     public function show(Quack $quack): Response
     {
+
+
+
         return $this->render('quack/show.html.twig', [
             'quack' => $quack,
+
         ]);
     }
 
@@ -63,6 +87,10 @@ class QuackController extends AbstractController
      */
     public function edit(Request $request, Quack $quack): Response
     {
+
+        $author = $quack->getAutheur();
+        // ==> retrives user object
+
         $form = $this->createForm(QuackType::class, $quack);
         $form->handleRequest($request);
 
