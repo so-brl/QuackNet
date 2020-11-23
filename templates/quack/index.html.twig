@@ -13,13 +13,17 @@
         {% endif %}
         <div class="row">
             {% for quack in quacks %}
+
                 <div class="card col-4 p-1">
                     <div class="card-body m-1">
 
                         <h4 class="card-title"> {{ quack.Auteur.duckname }}</h4>
                         <div class="d-flex justify-content-between">
                             <h6 class="card-subtitle mb-2 text-muted">Infos sur le Duck à implémenter</h6>
-                            <span class = "badge badge-pill badge-primary" style="height: fit-content"> Tag </span>
+                            {% for tag in quack.tags %}
+                                <span class = "badge badge-pill badge-primary" style="height: fit-content">{{tag}}</span>
+                            {% endfor %}
+
                             <small>{{ quack.createdAt ? quack.createdAt|date('d-m-y h:i:s') : '' }}</small>
                         </div>
 

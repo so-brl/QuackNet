@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Duck;
+
 use App\Entity\Quack;
 use App\Form\QuackType;
 use App\Repository\QuackRepository;
@@ -12,9 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
+
+
 /**
  * @Route("/quack")
  */
@@ -45,6 +44,7 @@ class QuackController extends AbstractController
         $quack = new Quack();
 
         $form = $this->createForm(QuackType::class, $quack);
+
         $quack ->setCreatedAt(new \DateTime());
         $quack ->setAuteur($this->getUser());
         $form->handleRequest($request);
@@ -55,6 +55,7 @@ class QuackController extends AbstractController
                 $uploadFileName = $fileUploader->uploadDuckImage($quackPicture);
                 $quack->setUploadFileName($uploadFileName);
             }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($quack);
             $entityManager->flush();
@@ -88,7 +89,7 @@ class QuackController extends AbstractController
     public function edit(Request $request, Quack $quack): Response
     {
 
-        $author = $quack->getAutheur();
+        $author = $quack->getAuteur();
         // ==> retrives user object
 
         $form = $this->createForm(QuackType::class, $quack);

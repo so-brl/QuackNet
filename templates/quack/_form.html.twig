@@ -1,19 +1,33 @@
 
 
+
+<div class="d-flex flex-column mt-5">
     {{ form_start(form) }}
-<div class="d-flex">
-    <div class="mr-3">
+    <style>
+        #quack_content{
+            height: 320px
+        }
+    </style>
+    <div class="m-3">
         {{ form_row(form.content, {
-            label: 'Message'
+            label: 'Message :'
         }) }}
     </div>
-
+    <div class="m-3">
     {{ form_row(form.uploadFileName, {
-        label: 'photo'
+        label: 'Photo :'
     })  }}
+    </div>
+
+    <div class="d-flex justify-content-end mr-3">
+        <button class="btn btn-primary mb-5 mt-3">{{ button_label|default('Save') }}</button>
+    </div>
+
     {{ form_end(form) }}
-    <button class="btn btn-primary mb-5 mt-3">{{ button_label|default('Save') }}</button>
 </div>
+
+
+
 
 
   

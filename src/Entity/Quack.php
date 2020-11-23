@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\QuackRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -35,10 +37,6 @@ class Quack
      */
     private $photo;
 
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $tags = [];
 
     /**
      * @ORM\ManyToOne(targetEntity=Duck::class)
@@ -50,6 +48,20 @@ class Quack
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $uploadFileName;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="quacks")
+     */
+    private $tags;
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
+
+
+
+
 
     public function getId(): ?int
     {
@@ -93,17 +105,6 @@ class Quack
         return $this;
     }
 
-    public function getTags(): ?array
-    {
-        return $this->tags;
-    }
-
-    public function setTags(?array $tags): self
-    {
-        $this->tags = $tags;
-
-        return $this;
-    }
 
     public function getAuteur(): ?Duck
     {
@@ -128,4 +129,29 @@ class Quack
 
         return $this;
     }
+
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
 }

@@ -1,39 +1,6 @@
-
-body {
-  background-color: #1a1a1a !important;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
+.logo-nav{
+  width: 10em;
 }
-
-a {
-  //color: rgba(255, 255, 255, .5);
-  //
-  //&:hover {
-  //  color: #f8db1b !important;
-  //  text-decoration: none;
-  //}
-}
-
-label {
-  color: rgba(255, 255, 255, .5);
-}
-
-.title-white {
-  color: rgba(255, 255, 255, .5);
-}
-
-.yellow-text {
-  color: #f8db1b;
-}
-
-.card {
-background-color: transparent;
-  border-radius: 0;
-}
-.card-body{
-  background-color: white;
-
+.bold{
+  font-weight: bolder !important;
 }
