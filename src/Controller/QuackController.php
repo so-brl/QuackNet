@@ -4,15 +4,22 @@ namespace App\Controller;
 
 
 use App\Entity\Quack;
+use App\Form\CommentType;
 use App\Form\QuackType;
 use App\Repository\QuackRepository;
 use App\Service\FileUploader;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use phpDocumentor\Reflection\DocBlock\TagFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
  * @Route("/quack")
@@ -45,8 +52,8 @@ class QuackController extends AbstractController
 
         $form = $this->createForm(QuackType::class, $quack);
 
-        $quack ->setCreatedAt(new \DateTime());
-        $quack ->setAuteur($this->getUser());
+        $quack->setCreatedAt(new \DateTime());
+        $quack->setAuteur($this->getUser());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -74,7 +81,6 @@ class QuackController extends AbstractController
      */
     public function show(Quack $quack): Response
     {
-
 
 
         return $this->render('quack/show.html.twig', [
@@ -112,12 +118,58 @@ class QuackController extends AbstractController
      */
     public function delete(Request $request, Quack $quack): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$quack->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $quack->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($quack);
             $entityManager->flush();
         }
-
+        if ($quack->getParent()) {
+            return $this->redirectToRoute('quack_show', array('id' => $quack->getParent()->getId()));
+        }
         return $this->redirectToRoute('quack_index');
     }
+
+    /**
+     * @Route("/quack/{quack}/comment/add", name="add_comment", methods={"GET","POST"})
+     * @param Quack $quack
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @throws Exception
+     */
+
+    public function storeComment(Quack $quack, Request $request, EntityManagerInterface $entityManager)
+    {
+        $comment = new Quack();
+        $form = $this->createForm(CommentType::class, $comment);
+        $comment->setCreatedAt(new \DateTime());
+        $comment->setAuteur($this->getUser());
+        $comment->setParent($quack);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('quack_show', array('id' => $quack->getId()));
+        }
+        return $this->render('comments/_comment_form.html.twig', [
+            'form' => $form->createView(),
+            'quack' => $quack
+        ]);
+    }
+//    /**
+//     * @Route("/quack/{quack}/comment/delete", name="delete_comment", methods={"DELETE"})
+//     */
+//    public function deleteComment(Request $request, Quack $quack): Response
+//    {
+//        if ($this->isCsrfTokenValid('delete'.$quack->getId(), $request->request->get('_token'))) {
+//            $entityManager = $this->getDoctrine()->getManager();
+//            $entityManager->remove($quack);
+//            $entityManager->flush();
+//        }
+//
+//        return $this->redirectToRoute('quack_show', array('id'=>$quack->getParent()));
+//    }
 }

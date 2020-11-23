@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Quack;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +20,6 @@ class QuackType extends AbstractType
 
         $builder
             ->add('content', TextType::class)
-            //->add('created_at',DateType::class)
             ->add('uploadFileName', FileType::class, [
                 'mapped' => false,
                 'required' => false,
@@ -35,9 +35,14 @@ class QuackType extends AbstractType
                         ],
                         'mimeTypesMessage' => 'Merci de choisir une image moins lourde',
                     ])
-                ],
+                ]
             ])
             ->add('tags')
+//            ->add('tags', CollectionType::class, [
+//                'entry_type' => TagType::class,
+//                'entry_options' => ['label' => true],
+//                'allow_add' => true,
+//            ])
           ;
 
     }

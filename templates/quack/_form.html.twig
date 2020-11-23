@@ -9,6 +9,11 @@
         }
     </style>
     <div class="m-3">
+        {{ form_row(form.tags, {
+            label: 'Tags :'
+        }) }}
+    </div>
+    <div class="m-3">
         {{ form_row(form.content, {
             label: 'Message :'
         }) }}

@@ -16,22 +16,24 @@
 
                 <div class="card col-4 p-1">
                     <div class="card-body m-1">
-
-                        <h4 class="card-title"> {{ quack.Auteur.duckname }}</h4>
                         <div class="d-flex justify-content-between">
-                            <h6 class="card-subtitle mb-2 text-muted">Infos sur le Duck à implémenter</h6>
-                            {% for tag in quack.tags %}
-                                <span class = "badge badge-pill badge-primary" style="height: fit-content">{{tag}}</span>
-                            {% endfor %}
-
+                        <h4 class="card-title"> {{ quack.Auteur.duckname }}</h4>
                             <small>{{ quack.createdAt ? quack.createdAt|date('d-m-y h:i:s') : '' }}</small>
+                        </div>
+                        <div class="d-flex justify-content-start">
+                            <h6 class="card-subtitle mb-2 text-muted">Infos sur le Duck à implémenter</h6>
+                        </div>
+                        <div class="d-flex justify-content-start">
+                        {% for tag in quack.tags %}
+                            <a class = "badge badge-pill badge-primary mr-1" style="height: fit-content">{{tag}}</a>
+                        {% endfor %}
                         </div>
 
                         <img class="d-block user-select-none pb-3 pt-3" width="100%" height="auto"
                              src="/uploads/{{ quack.uploadFileName }}">
                         <p class="card-text"> {{ quack.content }}</p>
                         <div class="d-flex justify-content-end">
-                            <a class=lead" href="{{ path('quack_show', {'id': quack.id}) }}" class="card-link">Lire le
+                            <a href="{{ path('quack_show', {'id': quack.id}) }}" class="card-link">Lire le
                                 Quack</a>
                         </div>
                     </div>

@@ -1,0 +1,11 @@
+{{ form_start(form, {'action': path('add_comment', {quack: quack.id})}) }}
+<div class="m-3">
+    {{ form_row(form.content, {
+        label: 'Votre commentaire :'
+    }) }}
+
+<div class="d-flex justify-content-end">
+<input class="btn btn-success" type="submit" value="commenter"/>
+</div>
+</div>
+{{ form_end(form) }}
