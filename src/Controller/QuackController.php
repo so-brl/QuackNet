@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Duck;
 use App\Entity\Quack;
 use App\Form\CommentType;
 use App\Form\QuackType;
@@ -78,14 +79,14 @@ class QuackController extends AbstractController
 
     /**
      * @Route("/{id}", name="quack_show", methods={"GET"})
+     * @param Quack $quack
+     * @param QuackRepository $quackRepository
+     * @return Response
      */
     public function show(Quack $quack): Response
     {
-
-
         return $this->render('quack/show.html.twig', [
             'quack' => $quack,
-
         ]);
     }
 
@@ -113,10 +114,13 @@ class QuackController extends AbstractController
 
     /**
      * @Route("/{id}", name="quack_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Quack $quack
+     * @return Response
      */
     public function delete(Request $request, Quack $quack): Response
     {
-        $this->denyAccessUnlessGranted('edit', $quack);
+        $this->denyAccessUnlessGranted('delete', $quack);
         if ($this->isCsrfTokenValid('delete' . $quack->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($quack);

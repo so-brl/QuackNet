@@ -42,4 +42,4 @@ security:
 #         - { path: '^/quack', roles: [  IS_ANONYMOUS ] }
 #         - { path: '^/duck', roles: [ IS_AUTHENTICATED_FULLY ] }
 #         - { path: '^/', roles: ROLE_USER}
-#    access_denied_url: /
+    access_denied_url: '/quack'

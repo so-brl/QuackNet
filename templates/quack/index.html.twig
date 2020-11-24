@@ -12,7 +12,7 @@
             </div>
         {% endif %}
         <div class="row">
-            {% for quack in quacks %}
+            {% for quack in quacks |sort((a, b) => b.createdAt <=> a.createdAt)%}
 
                 <div class="card col-4 p-1">
                     <div class="card-body m-1">
@@ -37,7 +37,7 @@
                                 Quack</a>
                         </div>
                     </div>
-                    {% if app.user %}
+                    {% if is_granted('edit', quack) %}
                         <div class="d-flex justify-content-end">
                             <a class="" href="{{ path('quack_edit', {'id': quack.id}) }}">Modifier</a>
                         </div>

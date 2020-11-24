@@ -36,6 +36,11 @@ class QuackRepository extends ServiceEntityRepository
         // $product = $query->setMaxResults(1)->getOneOrNullResult();
     }
 
+    public function findAllDesc()
+    {
+        return $this->findBy(array(), array('created_at' => 'DESC'));
+    }
+
     // /**
     //  * @return Quack[] Returns an array of Quack objects
     //  */

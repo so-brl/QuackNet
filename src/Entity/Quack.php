@@ -132,9 +132,9 @@ class Quack implements Collection
         return $this->tags;
     }
 
-    public function addTag(Tag $tag): self
+    public function addTag(Tag $tag): ?self
     {
-        if (!$this->tags->contains($tag)) {
+        if (!$this->contains($tag)) {
             $this->tags[] = $tag;
         }
 
@@ -388,7 +388,7 @@ class Quack implements Collection
      */
     public function getIterator()
     {
-        // TODO: Implement getIterator() method.
+        return $this->comments->getIterator();
     }
 
     /**

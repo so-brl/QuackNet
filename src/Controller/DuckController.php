@@ -74,6 +74,7 @@ class DuckController extends AbstractController
      */
     public function edit(Request $request, Duck $duck): Response
     {
+        $this->denyAccessUnlessGranted('edit', $duck);
         $form = $this->createForm(DuckType::class, $duck);
         $form->handleRequest($request);
 
@@ -94,6 +95,7 @@ class DuckController extends AbstractController
      */
     public function delete(Request $request, Duck $duck): Response
     {
+        $this->denyAccessUnlessGranted('delete', $duck);
         if ($this->isCsrfTokenValid('delete'.$duck->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($duck);
