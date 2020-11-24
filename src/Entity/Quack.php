@@ -36,9 +36,6 @@ class Quack implements Collection
      */
     private $created_at;
 
-
-
-
     /**
      * @ORM\ManyToOne(targetEntity=Duck::class)
      * @ORM\JoinColumn(nullable=false)
@@ -127,14 +124,14 @@ class Quack implements Collection
     /**
      * @return Collection|Tag[]
      */
-    public function getTags(): ?Collection
+    public function getTags()
     {
         return $this->tags;
     }
 
-    public function addTag(Tag $tag): ?self
+    public function addTag(Tag $tag): self
     {
-        if (!$this->contains($tag)) {
+        if (!$this->tags->contains($tag)) {
             $this->tags[] = $tag;
         }
 

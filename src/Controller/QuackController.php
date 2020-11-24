@@ -131,18 +131,48 @@ class QuackController extends AbstractController
         }
         return $this->redirectToRoute('quack_index');
     }
-
+//
+//    /**
+//     * @Route("/quack/{quack}/comment/add", name="add_comment", methods={"GET","POST"})
+//     * @param Quack $quack
+//     * @param Request $request
+//     * @param EntityManagerInterface $entityManager
+//     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+//     * @throws Exception
+//     */
+//
+//    public function storeComment(Quack $quack, Request $request, EntityManagerInterface $entityManager)
+//    {
+//        $comment = new Quack();
+//
+//        $form = $this->createForm(CommentType::class, $comment);
+//        $comment->setCreatedAt(new \DateTime());
+//        $comment->setAuteur($this->getUser());
+//        $comment->setParent($quack);
+//
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//
+//            $entityManager->persist($comment);
+//
+//            $entityManager->flush();
+//
+////            if ($quack->getParent()) {
+////                return $this->redirectToRoute('quack_show', array('id' => $quack->getParent()->getId()));
+////            }
+//            return $this->redirectToRoute('quack_show', array('id' => $quack->getId()));
+//        }
+//        return $this->render('comments/_comment_form.html.twig', [
+//            'form' => $form->createView(),
+//            'quack' => $quack
+//        ]);
+//    }
     /**
      * @Route("/quack/{quack}/comment/add", name="add_comment", methods={"GET","POST"})
-     * @param Quack $quack
-     * @param Request $request
-     * @param EntityManagerInterface $entityManager
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     * @throws Exception
      */
 
-    public function storeComment(Quack $quack, Request $request, EntityManagerInterface $entityManager)
-    {
+    public function storeComment(Quack $quack,  Request $request, FileUploader $fileUploader, EntityManagerInterface $entityManager) {
         $comment = new Quack();
         $form = $this->createForm(CommentType::class, $comment);
         $comment->setCreatedAt(new \DateTime());
@@ -162,5 +192,4 @@ class QuackController extends AbstractController
             'quack' => $quack
         ]);
     }
-
 }

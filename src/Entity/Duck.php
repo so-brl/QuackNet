@@ -58,6 +58,27 @@ class Duck implements UserInterface
      */
     private $isVerified = false;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Quack::class, mappedBy="Auteur", orphanRemoval=true)
+     */
+    private $quacks;
+
+    /**
+     * @return mixed
+     */
+    public function getQuacks()
+    {
+        return $this->quacks;
+    }
+
+    /**
+     * @param mixed $quacks
+     */
+    public function setQuacks($quacks): void
+    {
+        $this->quacks = $quacks;
+    }
+
 
     public function getId(): ?int
     {

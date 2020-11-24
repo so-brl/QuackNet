@@ -4,3 +4,17 @@
 .bold{
   font-weight: bolder !important;
 }
+
+.delete-button{
+  color: black !important;
+  appearance: none;
+  -webkit-writing-mode: horizontal-tb !important;
+  background-color: transparent;
+  border-color: transparent;
+  &:hover{
+    background-color: #d9534f;
+    color: white !important;
+    border-radius: 50%;
+  }
+
+}
