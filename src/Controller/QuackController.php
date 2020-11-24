@@ -35,7 +35,7 @@ class QuackController extends AbstractController
     {
 
         return $this->render('quack/index.html.twig', [
-            'quacks' => $quackRepository->findAll(),
+            'quacks' => $quackRepository->findParentQuacks(),
         ]);
     }
 
@@ -94,9 +94,7 @@ class QuackController extends AbstractController
      */
     public function edit(Request $request, Quack $quack): Response
     {
-
-        $author = $quack->getAuteur();
-        // ==> retrives user object
+        $this->denyAccessUnlessGranted('edit', $quack);
 
         $form = $this->createForm(QuackType::class, $quack);
         $form->handleRequest($request);
@@ -118,6 +116,7 @@ class QuackController extends AbstractController
      */
     public function delete(Request $request, Quack $quack): Response
     {
+        $this->denyAccessUnlessGranted('edit', $quack);
         if ($this->isCsrfTokenValid('delete' . $quack->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($quack);
@@ -159,17 +158,5 @@ class QuackController extends AbstractController
             'quack' => $quack
         ]);
     }
-//    /**
-//     * @Route("/quack/{quack}/comment/delete", name="delete_comment", methods={"DELETE"})
-//     */
-//    public function deleteComment(Request $request, Quack $quack): Response
-//    {
-//        if ($this->isCsrfTokenValid('delete'.$quack->getId(), $request->request->get('_token'))) {
-//            $entityManager = $this->getDoctrine()->getManager();
-//            $entityManager->remove($quack);
-//            $entityManager->flush();
-//        }
-//
-//        return $this->redirectToRoute('quack_show', array('id'=>$quack->getParent()));
-//    }
+
 }

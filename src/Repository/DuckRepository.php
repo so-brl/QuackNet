@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Duck;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -23,14 +24,17 @@ class DuckRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
 
-        return $entityManager->createQuery(
-            'SELECT u
-                FROM App\Entity\Duck u
-                WHERE u.duckname = :query
-                OR u.email = :query'
-        )
-            ->setParameter('query', $usernameOrEmail)
-            ->getOneOrNullResult();
+        try {
+            return $entityManager->createQuery(
+                'SELECT u
+                    FROM App\Entity\Duck u
+                    WHERE u.duckname = :query
+                    OR u.email = :query'
+            )
+                ->setParameter('query', $usernameOrEmail)
+                ->getOneOrNullResult();
+        } catch (NonUniqueResultException $e) {
+        }
     }
 
     // /**

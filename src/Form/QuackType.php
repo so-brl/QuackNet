@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Quack;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -39,10 +41,10 @@ class QuackType extends AbstractType
             ])
             ->add('tags')
 //            ->add('tags', CollectionType::class, [
-//                'entry_type' => TagType::class,
-//                'entry_options' => ['label' => true],
-//                'allow_add' => true,
-//            ])
+////                'entry_type' => TagType::class,
+////                'entry_options' => ['label' => true],
+////                'allow_add' => true,
+////            ])
           ;
 
     }

@@ -3,17 +3,21 @@
 namespace App\Entity;
 
 use App\Repository\QuackRepository;
+use App\Entity\Tag;
+use Closure;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Image;
+use Traversable;
 
 /**
  * @ORM\Entity(repositoryClass=QuackRepository::class)
  */
-class Quack
+class Quack implements Collection
 {
     /**
      * @ORM\Id
@@ -32,10 +36,7 @@ class Quack
      */
     private $created_at;
 
-    /**
-     * @ORM\Column(type="blob", nullable=true)
-     */
-    private $photo;
+
 
 
     /**
@@ -60,7 +61,7 @@ class Quack
     private $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity=Quack::class, mappedBy="parent",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Quack::class, mappedBy="parent", cascade={"persist", "remove"})
      *
      */
     private $comments;
@@ -99,20 +100,6 @@ class Quack
         return $this;
     }
 
-
-    public function getPhoto()
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto(File $photo = null): self
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
-
     public function getAuteur(): ?Duck
     {
         return $this->Auteur;
@@ -140,7 +127,7 @@ class Quack
     /**
      * @return Collection|Tag[]
      */
-    public function getTags(): Collection
+    public function getTags(): ?Collection
     {
         return $this->tags;
     }
@@ -204,5 +191,243 @@ class Quack
     }
 
 
+    /**
+     * @inheritDoc
+     */
+    public function add($element)
+    {
+        // TODO: Implement add() method.
+    }
 
+    /**
+     * @inheritDoc
+     */
+    public function clear()
+    {
+        // TODO: Implement clear() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function contains($element)
+    {
+        // TODO: Implement contains() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isEmpty()
+    {
+        // TODO: Implement isEmpty() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function remove($key)
+    {
+        // TODO: Implement remove() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function removeElement($element)
+    {
+        // TODO: Implement removeElement() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsKey($key)
+    {
+        // TODO: Implement containsKey() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function get($key)
+    {
+        // TODO: Implement get() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getKeys()
+    {
+        // TODO: Implement getKeys() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getValues()
+    {
+        // TODO: Implement getValues() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function set($key, $value)
+    {
+        // TODO: Implement set() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        // TODO: Implement toArray() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function first()
+    {
+        // TODO: Implement first() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function last()
+    {
+        // TODO: Implement last() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function key()
+    {
+        // TODO: Implement key() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function current()
+    {
+        // TODO: Implement current() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function next()
+    {
+        // TODO: Implement next() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function exists(Closure $p)
+    {
+        // TODO: Implement exists() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function filter(Closure $p)
+    {
+        // TODO: Implement filter() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function forAll(Closure $p)
+    {
+        // TODO: Implement forAll() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function map(Closure $func)
+    {
+        // TODO: Implement map() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function partition(Closure $p)
+    {
+        // TODO: Implement partition() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function indexOf($element)
+    {
+        // TODO: Implement indexOf() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function slice($offset, $length = null)
+    {
+        // TODO: Implement slice() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getIterator()
+    {
+        // TODO: Implement getIterator() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function offsetExists($offset)
+    {
+        // TODO: Implement offsetExists() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function offsetGet($offset)
+    {
+        // TODO: Implement offsetGet() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function offsetSet($offset, $value)
+    {
+        // TODO: Implement offsetSet() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function offsetUnset($offset)
+    {
+        // TODO: Implement offsetUnset() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function count()
+    {
+        // TODO: Implement count() method.
+    }
 }
