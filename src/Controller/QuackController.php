@@ -89,6 +89,7 @@ class QuackController extends AbstractController
                 $quack->setUploadFileName($uploadFileName);
             }
 
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($quack);
             $entityManager->flush();

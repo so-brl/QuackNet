@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Quack;
+use App\Entity\Tag;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\Form\AbstractType;

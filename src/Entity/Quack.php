@@ -13,9 +13,13 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Image;
 use Traversable;
+use Symfony\Component\Serializer\Annotation\Groups ;
+use ApiPlatform\Core\Annotation\ApiResource;
+
 
 /**
  * @ORM\Entity(repositoryClass=QuackRepository::class)
+ * @ApiResource
  */
 class Quack implements Collection
 {
@@ -23,43 +27,50 @@ class Quack implements Collection
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("quack:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups("quack:read")
      */
     private $content;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("quack:read")
      */
     private $created_at;
 
     /**
      * @ORM\ManyToOne(targetEntity=Duck::class)
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("quack:read")
      */
     private $Auteur;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("quack:read")
      */
     private $uploadFileName;
 
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="quacks")
+     * @Groups("quack:read")
      */
     private $tags;
 
     /**
      * @ORM\ManyToOne(targetEntity=Quack::class, inversedBy="comments")
+     * @Groups("quack:read")
      */
     private $parent;
 
     /**
      * @ORM\OneToMany(targetEntity=Quack::class, mappedBy="parent", cascade={"persist", "remove"})
-     *
+     * @Groups("quack:read")
      */
     private $comments;
 
@@ -122,17 +133,19 @@ class Quack implements Collection
     }
 
     /**
-     * @return Collection|Tag[]
+     * @return Collection|self[]
      */
-    public function getTags()
+    public function getTags(): ?Collection
     {
         return $this->tags;
     }
 
-    public function addTag(Tag $tag): self
+    public function addTag(Tag $tag)
     {
-        if (!$this->tags->contains($tag)) {
+
+        if (!$this->tags) {
             $this->tags[] = $tag;
+
         }
 
         return $this;
