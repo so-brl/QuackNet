@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -18,6 +19,23 @@ class TagRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Tag::class);
     }
+
+//
+//    public function loadQuackByTagname(string $tag)
+//    {
+//        $entityManager = $this->getEntityManager();
+//
+//        try {
+//            return $entityManager->createQuery(
+//                'SELECT u
+//                    FROM App\Entity\Quack u
+//                    WHERE u.tags = :query'
+//            )
+//                ->setParameter('query', $tag)
+//                ->getOneOrNullResult();
+//        } catch (NonUniqueResultException $e) {
+//        }
+//    }
 
     // /**
     //  * @return Tag[] Returns an array of Tag objects
