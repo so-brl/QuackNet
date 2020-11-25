@@ -41,6 +41,17 @@ class QuackRepository extends ServiceEntityRepository
         return $this->findBy(array(), array('created_at' => 'DESC'));
     }
 
+    public function search($duckName) {
+        return $this->createQueryBuilder('q')
+            ->leftJoin('q.Auteur', 'Auteur')
+            ->leftJoin('q.tags', 'tag')
+            ->andWhere('Auteur.duckname LIKE :searchedName OR tag.name LIKE :searchedName')
+            ->setParameter('searchedName', '%'.$duckName.'%')
+            ->orderBy('q.created_at', 'DESC')
+            ->getQuery()
+            ->execute();
+    }
+
     // /**
     //  * @return Quack[] Returns an array of Quack objects
     //  */

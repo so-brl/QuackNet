@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Duck;
 use App\Entity\Quack;
 use App\Form\CommentType;
+use App\Form\QuackSearchFormType;
 use App\Form\QuackType;
 use App\Repository\QuackRepository;
 use App\Service\FileUploader;
@@ -32,18 +33,42 @@ class QuackController extends AbstractController
      * @param QuackRepository $quackRepository
      * @return Response
      */
-    public function index(QuackRepository $quackRepository): Response
+    public function index(QuackRepository $quackRepository,Request $request): Response
     {
+
+        $searchForm = $this->createFormBuilder()
+            ->add('q')
+            ->setMethod('GET')
+            ->getForm();
+
+        $searchForm->handleRequest($request);
+
+        $data = $quackRepository->findAllDesc();
+
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+
+            $auteur = $searchForm->get('q')->getData();
+
+            $data = $quackRepository->search($auteur);
+            return $this->render('quack/index.html.twig', [
+                'searchForm' => $searchForm->createView(),
+                'quacks' =>  $data,
+            ]);
+
+        }
+
 
         return $this->render('quack/index.html.twig', [
             'quacks' => $quackRepository->findParentQuacks(),
+            'searchForm' => $searchForm->createView()
         ]);
     }
 
     /**
      * @Route("/new", name="quack_new", methods={"GET","POST"})
      * @param Request $request
-     * @param $fileUploader
+     * @param FileUploader $fileUploader
+     * @param QuackRepository $quackRepository
      * @return Response
      * @throws Exception
      */
@@ -70,6 +95,9 @@ class QuackController extends AbstractController
 
             return $this->redirectToRoute('quack_index');
         }
+
+
+
 
         return $this->render('quack/new.html.twig', [
             'quack' => $quack,
@@ -131,43 +159,7 @@ class QuackController extends AbstractController
         }
         return $this->redirectToRoute('quack_index');
     }
-//
-//    /**
-//     * @Route("/quack/{quack}/comment/add", name="add_comment", methods={"GET","POST"})
-//     * @param Quack $quack
-//     * @param Request $request
-//     * @param EntityManagerInterface $entityManager
-//     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-//     * @throws Exception
-//     */
-//
-//    public function storeComment(Quack $quack, Request $request, EntityManagerInterface $entityManager)
-//    {
-//        $comment = new Quack();
-//
-//        $form = $this->createForm(CommentType::class, $comment);
-//        $comment->setCreatedAt(new \DateTime());
-//        $comment->setAuteur($this->getUser());
-//        $comment->setParent($quack);
-//
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//
-//            $entityManager->persist($comment);
-//
-//            $entityManager->flush();
-//
-////            if ($quack->getParent()) {
-////                return $this->redirectToRoute('quack_show', array('id' => $quack->getParent()->getId()));
-////            }
-//            return $this->redirectToRoute('quack_show', array('id' => $quack->getId()));
-//        }
-//        return $this->render('comments/_comment_form.html.twig', [
-//            'form' => $form->createView(),
-//            'quack' => $quack
-//        ]);
-//    }
+
     /**
      * @Route("/quack/{quack}/comment/add", name="add_comment", methods={"GET","POST"})
      */
@@ -192,4 +184,5 @@ class QuackController extends AbstractController
             'quack' => $quack
         ]);
     }
+
 }
