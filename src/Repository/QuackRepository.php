@@ -27,13 +27,8 @@ class QuackRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p')
             ->where('p.parent IS NULL')
             ->orderBy('p.created_at', 'DESC');
-
         $query = $qb->getQuery();
-
         return $query->execute();
-
-        // to get just one result:
-        // $product = $query->setMaxResults(1)->getOneOrNullResult();
     }
 
     public function findAllDesc()
@@ -51,6 +46,10 @@ class QuackRepository extends ServiceEntityRepository
             ->getQuery()
             ->execute();
     }
+    /**
+     * @return Quack[] Returns an array of Quack objects
+     */
+
     public function findByTag($tag)
     {
         return $this->createQueryBuilder('q')
@@ -60,8 +59,10 @@ class QuackRepository extends ServiceEntityRepository
             ->orderBy('q.created_at', 'DESC')
             ->getQuery()
             ->execute();
-    }
 
+        // to get just one result:
+        // $product = $query->setMaxResults(1)->getOneOrNullResult();
+    }
     // /**
     //  * @return Quack[] Returns an array of Quack objects
     //  */

@@ -13,63 +13,62 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Image;
 use Traversable;
-use Symfony\Component\Serializer\Annotation\Groups ;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
  * @ORM\Entity(repositoryClass=QuackRepository::class)
  */
-class Quack implements Collection
+class Quack implements  \Serializable
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("quack:read")
+     * @Groups({"read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("quack:read")
+     * @Groups({"read"})
      */
     private $content;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups("quack:read")
+     * @Groups({"read"})
      */
     private $created_at;
 
     /**
      * @ORM\ManyToOne(targetEntity=Duck::class)
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("quack:read")
+     * @Groups({"read"})
      */
     private $Auteur;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups("quack:read")
+     * @Groups({"read"})
      */
     private $uploadFileName;
 
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="quacks")
-     * @Groups("quack:read")
+     * @Groups({"read"})
      */
     private $tags;
 
     /**
      * @ORM\ManyToOne(targetEntity=Quack::class, inversedBy="comments")
-     * @Groups("quack:read")
+     *
      */
     private $parent;
 
     /**
      * @ORM\OneToMany(targetEntity=Quack::class, mappedBy="parent", cascade={"persist", "remove"})
-     * @Groups("quack:read")
+     * @Groups({"read"})
      */
     private $comments;
 
@@ -438,5 +437,40 @@ class Quack implements Collection
     public function count()
     {
         // TODO: Implement count() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->tags,
+            $this->content,
+            $this->created_at,
+            $this->Auteur,
+            $this->uploadFileName,
+            $this->parent,
+            $this->comments,
+
+        ));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->tags,
+            $this->content,
+            $this->created_at,
+            $this->Auteur,
+            $this->uploadFileName,
+            $this->parent,
+            $this->comments,
+            ) = unserialize($serialized, array('allowed_classes' => false));
     }
 }

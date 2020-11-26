@@ -23,6 +23,7 @@ class Tag
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read"})
      */
     private $name;
 
@@ -33,6 +34,7 @@ class Tag
 
     /**
      * @ORM\ManyToMany(targetEntity=Quack::class, mappedBy="tags",  cascade={"persist", "remove"})
+     *
      */
     private $quacks;
 

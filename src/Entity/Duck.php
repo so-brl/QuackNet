@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=DuckRepository::class)
@@ -20,32 +21,38 @@ class Duck implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read"})
      */
     private $duckname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read"})
      */
     private $email;
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups({"read"})
      */
     private $password;
     /**
