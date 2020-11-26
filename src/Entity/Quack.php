@@ -14,12 +14,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Image;
 use Traversable;
 use Symfony\Component\Serializer\Annotation\Groups ;
-use ApiPlatform\Core\Annotation\ApiResource;
+
 
 
 /**
  * @ORM\Entity(repositoryClass=QuackRepository::class)
- * @ApiResource
  */
 class Quack implements Collection
 {

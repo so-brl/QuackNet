@@ -51,6 +51,16 @@ class QuackRepository extends ServiceEntityRepository
             ->getQuery()
             ->execute();
     }
+    public function findByTag($tag)
+    {
+        return $this->createQueryBuilder('q')
+            ->leftJoin('q.tags', 'tag')
+            ->andWhere('tag.name = :searchedTag')
+            ->setParameter('searchedTag', $tag)
+            ->orderBy('q.created_at', 'DESC')
+            ->getQuery()
+            ->execute();
+    }
 
     // /**
     //  * @return Quack[] Returns an array of Quack objects

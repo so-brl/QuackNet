@@ -1,28 +1,34 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="home container-fluid d-flex align-items-center  "  style="height: 100vh; background-image: url('{{ asset('build/bg-duck.jpg') }}'); background-size: cover; background-repeat: no-repeat">
-        <div class="container " >
-            <div class=" d-flex flex-column home_identity justify-content-center align-items-center">
-                <div class="text-center mb-5">
+    <div class="home container-fluid d-flex align-items-center  "
+         style="height: 100vh; background-image: url('{{ asset('build/pink-flamingo-3206415.jpg') }}'); background-size: cover; background-repeat: no-repeat">
+        <div class="container cardCustom  d-flex flex-column align-items-center ">
+            <div class=" d-flex flex-column home_identity justify-content-between align-items-center">
+                <div class="text-center ">
+                    <h1 class="home_identity"> QuackNet
+{#                        <img class="home_identity_logo mb-3"#}
+{#                                                   src="{{ asset('build/quacknet-maj-logo.svg') }}" alt="quacknet-logo">#}
+                    </h1>
+                    <p class="home_identity">A votre tour de <span class="bold">cancaner*</span> dans la marre.</p>
+                    <div class="d-flex justify-content-center mb-5 mt-5">
+                        {% if app.user != true %}
+                        <a class="btn btn-primary m-1" href="/register"> Je m'inscris</a>
+                        <a class="btn btn-primary m-1" href="/login">Connexion</a>
+                        {% else %}
+                            <a class="btn btn-primary m-1" href="/quack">Rejoindre la marre</a>
+                        {% endif %}
+                    </div>
 
-                    <h1 class="home_identity"><img class="home_identity_logo mb-3" src="{{ asset('build/quacknet-maj-logo.svg') }}" alt="quacknet-logo"></h1>
-                    <p class="home_identity">A votre tour de <span class ="bold">cancaner*</span> dans la marre.</p>
-              <div class="d-flex justify-content-center mt-5">
-                  <a class="btn btn-primary m-1" href="/register">   Je m'inscris</a>
-                  <a class="btn btn-primary m-1" href="/login">Connexion</a>
-              </div>
-
+                    <p class="mb-0"><small>* Faire courir des bruits de couloir et des bavardages malveillants. <br>Médire de
+                            quelqu'un
+                            en
+                            colportant des propos négatifs dans l'intention de nuire. <br>Expression synonyme de
+                            babiller ou
+                            jaser appartenant au langage familier. </small>
+                    </p>
                 </div>
             </div>
-
-            <p class="text-center mb-5">
-                <small>* Faire courir des bruits de couloir et des bavardages malveillants. <br>Médire de quelqu'un en
-                    colportant des propos négatifs dans l'intention de nuire. <br>Expression synonyme de babiller ou
-                    jaser appartenant au langage familier. </small>
-            </p>
         </div>
-
     </div>
-
 {% endblock %}

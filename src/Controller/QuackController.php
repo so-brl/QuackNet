@@ -6,7 +6,6 @@ namespace App\Controller;
 use App\Entity\Duck;
 use App\Entity\Quack;
 use App\Form\CommentType;
-use App\Form\QuackSearchFormType;
 use App\Form\QuackType;
 use App\Repository\QuackRepository;
 use App\Service\FileUploader;
