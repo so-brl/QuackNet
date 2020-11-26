@@ -1,0 +1,15 @@
+<div class="mh-100">
+    <h1 class="d-none">Liste des Quacks</h1>
+    {% if app.user %}
+        <ul class="">
+            <li><a class="" href="/duck/{{ app.user.id }}"><i class="fas fa-user"></i> {{ app.user.username }} </a></li>
+        </ul>
+    {% else %}
+        <ul class="">
+            <li class=""><a class="nav-link" href="/quack">La marre</a></li>
+            <li class=""><a class="nav-link" href="/login">Connexion</a></li>
+            <li class=""><a class="nav-link" href="/register">Inscription</a></li>
+        </ul>
+    {% endif %}
+</div>
+

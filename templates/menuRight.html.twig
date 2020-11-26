@@ -1,0 +1,17 @@
+<div class="mh-100">
+    {% if app.user %}
+        <ul class="">
+            <li><a class="btn btn-primary btn-sm" href="/quack/new"><i class="fas fa-plus"></i>Ajouter un Quack</a></li>
+            <li><a class="" href="/quack">Liste des Quacks</a></li>
+            <li><a class="" href="/duck/">Liste des Ducks</a></li>
+            {#                        <li><a class="dropdown-item" href="/duck/new">Ajouter un Duck</a></li>#}
+            <li><a class="" href="/duck/{{ app.user.id }}"><i class="fas fa-user"></i>Mon Profil</a></li>
+        </ul>
+    {% else %}
+        <ul class="">
+            <li class=""><a class="nav-link" href="/quack">La marre</a></li>
+            <li class=""><a class="nav-link" href="/login">Connexion</a></li>
+            <li class=""><a class="nav-link" href="/register">Inscription</a></li>
+        </ul>
+    {% endif %}
+</div>

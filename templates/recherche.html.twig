@@ -1,0 +1,13 @@
+<div class="d-flex justify-content-between fixed-top bg-light ">
+    <a class="navbar-brand ml-5" href="/">QuackNet</a>
+    <div class=" mr-5 d-flex flex-raw align-items-center" >
+        <form class="form-inline " style="margin-right: 9em">
+            {{ form_start(searchForm) }}
+            {{ form_row(searchForm.q, {'label': " ", 'attr': {'placeholder': 'Votre recherche'}}) }}
+            <button class="ml-3 btn btn-primary btn-sm">Rechercher</button>
+            {{ form_end(searchForm) }}
+        </form>
+        <a class=" mr-2 pr-2 " href="/" style="border-right: 1px solid gray">Connexion</a>
+        <a class=" mr-2 " href="/">Inscription</a>
+    </div>
+</div>

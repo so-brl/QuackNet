@@ -2,37 +2,12 @@
 
 {% block title %}Quack index{% endblock %}
 
-{% block body %}
-    <div class="container-fluid d-flex flex-raw flex-nowrap">
-        <div class=" pl-5" style="height: 100vh">
-            <div class="mh-100">
-                <h1 class="d-none">Liste des Quacks</h1>
-
-                {% if app.user %}
-                    <ul class="">
-                        {#                        <li><a class="dropdown-item" href="/duck/new">Ajouter un Duck</a></li>#}
-                        <li><a class="" href="/duck/{{ app.user.id }}"><i class="fas fa-user"></i>   {{ app.user.username  }} </a></li>
-                    </ul>
-                {% else %}
-                    <ul class="">
-                        <li class=""><a class="nav-link" href="/quack">La marre</a></li>
-                        <li class=""><a class="nav-link" href="/login">Connexion</a></li>
-                        <li class=""><a class="nav-link" href="/register">Inscription</a></li>
-                    </ul>
-                {% endif %}
-
-            </div>
-        </div>
-        <div class=" col-7 d-flex flex-column justify-content-between position-relative">
-
+{% block content %}
             <div class=" m-5">
-
-
-                <div class="row">
+                <div class="d-flex flex-column">
                     {% for quack in quacks |sort((a, b) => b.createdAt <=> a.createdAt) %}
-
                         <div class="card  p-1">
-                            <div class="card-body m-1">
+                            <div class="card-body m-1  ">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="card-title"> {{ quack.Auteur.duckname }}</h4>
                                     <small>{{ quack.createdAt ? quack.createdAt|date('d-m-y h:i:s') : '' }}</small>
@@ -61,7 +36,6 @@
                                 </div>
                             {% endif %}
                         </div>
-
                     {% else %}
                         <div>
                             <p>no records found
@@ -69,27 +43,5 @@
                         </div>
                     {% endfor %}
                 </div>
-
             </div>
-        </div>
-        <div class=" mr-5 pr-5" style=" height: 100vh">
-            <div class="mh-100">
-                {% if app.user %}
-                    <ul class="">
-                        <li><a class="btn btn-primary btn-sm" href="/quack/new"><i class="fas fa-plus"></i>Ajouter un Quack</a></li>
-                        <li><a class="" href="/quack">Liste des Quacks</a></li>
-                        <li><a class="" href="/duck/">Liste des Ducks</a></li>
-                        {#                        <li><a class="dropdown-item" href="/duck/new">Ajouter un Duck</a></li>#}
-                        <li><a class="" href="/duck/{{ app.user.id }}"><i class="fas fa-user"></i>Mon Profil</a></li>
-                    </ul>
-                {% else %}
-                    <ul class="">
-                        <li class=""><a class="nav-link" href="/quack">La marre</a></li>
-                        <li class=""><a class="nav-link" href="/login">Connexion</a></li>
-                        <li class=""><a class="nav-link" href="/register">Inscription</a></li>
-                    </ul>
-                {% endif %}
-            </div>
-        </div>
-    </div>
 {% endblock %}

@@ -30,12 +30,98 @@ a{
     color: #e1a4a9 ;
   }
 }
+input {
+  font: 400 1rem Arial;
+  padding: 1px 2px;
+  border-width: 2px;
+}
+
 .btn-primary {
   color: #fff;
   background-color:#e1a4a9;
   border-color: #e1a4a9;
   font-weight: unset;
 }
+.navbar-brand{
+  font-size: 1.5rem ;
+  font-weight: 900;
+  text-transform: initial;
+  font-family: 'Lobster', cursive;
+}
+//   color: #8f0237;
+//    color: #e1a4a9;
+.home{
+  color: white;
+  h1{
+    font-size: 6rem ;
+    font-weight: 900;
+    color: white;
+    text-transform: initial;
+    font-family: 'Lobster', cursive;
+  }
+  h3{
+       font-size: 2rem ;
+       font-weight: 900;
+       color: white;
+       text-transform: initial;
+       font-family: 'Lobster', cursive;
+     }
+  h4{
+    font-size: 1.5rem ;
+    font-weight: 900;
+    color:#e1a4a9;
+    text-transform: initial;
+  }
+}
+.menuLeft{
+   position: fixed;
+   top:5em;
+  left:14%;
+
+ }
+
+.menuRight{
+  position: fixed;
+  top:5em;
+  right:14%;
+
+}
+
+.cardCustom{
+  background-color: rgba(0,0,0,0.6);
+  width: fit-content;
+  padding: 3em;
+}
+.form-control {
+  display: block;
+  width: 100%;
+ height: unset !important;
+  padding: .3rem 1rem!important;
+  font-size: .875rem;
+   font-weight: 400;
+line-height: unset;
+  color: #55595c;
+  background-color: #f7f7f9;
+  background-clip: padding-box;
+  border: 0 solid #ced4da;
+  border-radius: 0;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .logo-nav{
   width: 10em;
 }
