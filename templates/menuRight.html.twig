@@ -1,17 +1,19 @@
 <div class="mh-100">
     {% if app.user %}
-        <ul class="">
-            <li><a class="btn btn-primary btn-sm" href="/quack/new"><i class="fas fa-plus"></i>Ajouter un Quack</a></li>
-            <li><a class="" href="/quack">Liste des Quacks</a></li>
-            <li><a class="" href="/duck/">Liste des Ducks</a></li>
+        <ul class="mt-5">
+            <li><a class="btn btn-primary btn-sm mb-4" href="/quack/new"><i class="fas fa-plus mr-3"></i>Ajouter un Quack</a></li>
+            <li class="mb-1 pb-2" style="border-bottom: 1px solid lightgray"><a class="mt-4" href="/quack"><i class="fas fa-list-ul mr-3"></i> La marre</a></li>
             {#                        <li><a class="dropdown-item" href="/duck/new">Ajouter un Duck</a></li>#}
-            <li><a class="" href="/duck/{{ app.user.id }}"><i class="fas fa-user"></i>Mon Profil</a></li>
+        </ul>
+        <ul >
+            <li class="mb-1 pb-2" style="border-bottom: 1px solid lightgray" ><a class="" href="/duck/"><i class="fas fa-users mr-3"></i>Liste des Ducks</a></li>
+            {#                        <li><a class="dropdown-item" href="/duck/new">Ajouter un Duck</a></li>#}
         </ul>
     {% else %}
-        <ul class="">
-            <li class=""><a class="nav-link" href="/quack">La marre</a></li>
-            <li class=""><a class="nav-link" href="/login">Connexion</a></li>
-            <li class=""><a class="nav-link" href="/register">Inscription</a></li>
+        <ul class=""mt-5">
+            <li class="mb-1 pb-2" style="border-bottom: 1px solid lightgray" ><a class="nav-link" href="/quack">La marre</a></li>
+            <li class="mb-1 pb-2" style="border-bottom: 1px solid lightgray" ><a class="nav-link" href="/login">Connexion</a></li>
+            <li class="mb-1 pb-2" style="border-bottom: 1px solid lightgray" ><a class="nav-link" href="/register">Inscription</a></li>
         </ul>
     {% endif %}
 </div>

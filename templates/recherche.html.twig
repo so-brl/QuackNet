@@ -8,9 +8,11 @@
             {{ form_end(searchForm) }}
         </form>
         {% if app.user %}
-            <a class=" mr-2 pr-5" href="/logout">Déconnexion</a>
+         <a class=" mr-2 pr-5" href="/duck/{{ app.user.id }}" style="border-right: 1px solid lightgray"><i class="fas fa-user mr-3"></i>Mon Profil</a>
+            <a class=" mr-2 pr-5 pl-5" href="/logout"><i class="fas fa-sign-out-alt  mr-3"></i></i>Déconnexion</a>
+
         {% else %}
-        <a class=" mr-2 pr-2 " href="/" style="border-right: 1px solid gray">Connexion</a>
+        <a class=" mr-2 pr-2 " href="/" style="border-right: 1px solid lightgray">Connexion</a>
         <a class=" mr-2 " href="/">Inscription</a>
         {% endif %}
     </div>
