@@ -192,4 +192,13 @@ class QuacknetApiController extends AbstractController
         return new Response('', Response::HTTP_CREATED);
 
     }
+
+
+    // Authentification
+//http://127.0.0.1:8000/api/quack/id
+
+
+
+
+
 }

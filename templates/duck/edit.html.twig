@@ -2,12 +2,25 @@
 
 {% block title %}Edit Duck{% endblock %}
 
-{% block body %}
-    <h1>Edit Duck</h1>
+    {% block content %}
+
+<div class=" m-5">
+    <div class="d-flex flex-column">
+
+        <div class="card  p-1">
+            <div class="card-body m-1  ">
+                <div class="d-flex justify-content-between">
+                    <h1 class="card-title"> {{ duck.lastname }} {{ duck.firstname }}</h1>
+                    <small>Inscrit depuis le 00:00:00</small>
+                </div>
 
     {{ include('duck/_form.html.twig', {'button_label': 'Update'}) }}
+            </div>
+        </div>
+    </div>
 
     <a href="{{ path('duck_index') }}">back to list</a>
 
     {{ include('duck/_delete_form.html.twig') }}
+</div>
 {% endblock %}

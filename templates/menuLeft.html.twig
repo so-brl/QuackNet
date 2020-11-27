@@ -1,8 +1,11 @@
 <div class="mh-100">
     <h1 class="d-none">Liste des Quacks</h1>
     {% if app.user %}
+        <div>
+            <a class="text-center" href="/duck/{{ app.user.id }}"><img class="profilPicture d-block user-select-none pb-3 pt-3" src="/uploads/{{ app.user.uploadFileName }}"/></a>
+        </div>
         <ul class="">
-            <li><a class="" href="/duck/{{ app.user.id }}"><i class="fas fa-user"></i> {{ app.user.username }} </a></li>
+            <li><a class="" href="/duck/{{ app.user.id }}">{{ app.user.username }} </a></li>
         </ul>
     {% else %}
         <ul class="">

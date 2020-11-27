@@ -1,19 +1,24 @@
-<div class="d-flex justify-content-between fixed-top bg-light ">
-    <a class="navbar-brand ml-5" href="/">QuackNet</a>
-    <div class=" mr-5 d-flex flex-raw align-items-center" >
-        <form class="form-inline " style="margin-right: 9em">
-            {{ form_start(searchForm) }}
-            {{ form_row(searchForm.q, {'label': " ", 'attr': {'placeholder': 'Votre recherche'}}) }}
-            <button class="ml-3 btn btn-primary btn-sm">Rechercher</button>
-            {{ form_end(searchForm) }}
-        </form>
-        {% if app.user %}
-         <a class=" mr-2 pr-5" href="/duck/{{ app.user.id }}" style="border-right: 1px solid lightgray"><i class="fas fa-user mr-3"></i>Mon Profil</a>
-            <a class=" mr-2 pr-5 pl-5" href="/logout"><i class="fas fa-sign-out-alt  mr-3"></i></i>Déconnexion</a>
+{% extends 'base.html.twig' %}
+{% block search %}
+    <div class="d-flex justify-content-between fixed-top bg-light ">
+        <a class="navbar-brand ml-5" href="/">QuackNet</a>
+        <div class=" mr-5 d-flex flex-raw align-items-center" >
+            {% if(app.request.get('_route') != 'duck_show')%}
+            <form class="form-inline " style="margin-right: 9em">
+                {{ form_start(searchForm) }}
+                {{ form_row(searchForm.q, {'label': " ", 'attr': {'placeholder': 'Votre recherche'}}) }}
+                <button class="ml-3 btn btn-primary btn-sm">Rechercher</button>
+                {{ form_end(searchForm) }}
+            </form>
+            {% endif %}
+            {% if app.user %}
+                <a class=" mr-2 pr-5" href="/duck/{{ app.user.id }}" style="border-right: 1px solid lightgray"><img class="profilPictureNav d-block user-select-none pb-3 pt-3" src="/uploads/{{ app.user.uploadFileName }}"/></a>
+                <a class=" mr-2 pr-5 pl-5" href="/logout"><i class="fas fa-sign-out-alt  mr-3"></i></i>Déconnexion</a>
 
-        {% else %}
-        <a class=" mr-2 pr-2 " href="/" style="border-right: 1px solid lightgray">Connexion</a>
-        <a class=" mr-2 " href="/">Inscription</a>
-        {% endif %}
+            {% else %}
+                <a class=" mr-2 pr-2 " href="/" style="border-right: 1px solid lightgray">Connexion</a>
+                <a class=" mr-2 " href="/">Inscription</a>
+            {% endif %}
+        </div>
     </div>
-</div>
+{% endblock %}

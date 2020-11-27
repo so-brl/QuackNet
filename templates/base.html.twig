@@ -31,9 +31,30 @@
     {% endblock %}
 
     {% else %}
-    {% if(app.request.get('_route') != 'app_register') or (app.request.get('_route') != 'app_login' )%}
-        {{ include('recherche.html.twig') }}
-    {% endif %}
+        <div class="d-flex justify-content-between fixed-top bg-light ">
+            <a class="navbar-brand ml-5" href="/">QuackNet</a>
+            <div class=" mr-5 d-flex flex-raw align-items-center" >
+                {% if app.request.get('_route') == 'quack_index' %}
+
+                    <form class="form-inline " style="margin-right: 9em">
+                        {{ form_start(searchForm) }}
+                        {{ form_row(searchForm.q, {'label': " ", 'attr': {'placeholder': 'Votre recherche'}}) }}
+                        <button class="ml-3 btn btn-primary btn-sm">Rechercher</button>
+                        {{ form_end(searchForm) }}
+                    </form>
+
+                {% endif %}
+                {% if app.user %}
+                    <a class="btnProfilNav mr-2 pr-5 pl-5" href="/duck/{{ app.user.id }}" style="border-right: 1px solid lightgray;border-left: 1px solid lightgray"><img class="profilPictureNav d-block user-select-none pb-3 pt-3" src="/uploads/{{ app.user.uploadFileName }}"/></a>
+                    <a class=" mr-2 pr-5 pl-5" href="/logout" ><i class="fas fa-sign-out-alt  mr-3"></i></a>
+
+                {% else %}
+                    <a class=" mr-2 pr-2 " href="/" style="border-right: 1px solid lightgray">Connexion</a>
+                    <a class=" mr-2 " href="/">Inscription</a>
+                {% endif %}
+            </div>
+        </div>
+
     <div class="container-fluid d-flex flex-raw flex-nowrap justify-content-around">
         {% if app.request.get('_route') != 'home' %}
             {% if app.user %}

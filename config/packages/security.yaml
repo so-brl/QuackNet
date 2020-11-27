@@ -25,6 +25,8 @@ security:
                 path: app_logout
                 # where to redirect after logout
                 # target: app_any_route
+            http_basic:
+                realm: 'prout'
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -39,7 +41,8 @@ security:
          - { path: '^/profile', roles: ROLE_USER }
          - { path: '^/register', roles: [ IS_ANONYMOUS ] }
          - { path: '^/login', roles: [  IS_ANONYMOUS ] }
+         - { path: '^/api', roles: [ ROLE_USER ] }
 #         - { path: '^/quack', roles: [  IS_ANONYMOUS ] }
 #         - { path: '^/duck', roles: [ IS_AUTHENTICATED_FULLY ] }
 #         - { path: '^/', roles: ROLE_USER}
-    access_denied_url: '/quack'
+#    access_denied_url: '/quack'

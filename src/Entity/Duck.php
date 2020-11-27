@@ -71,6 +71,12 @@ class Duck implements UserInterface
     private $quacks;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read"})
+     */
+    private $uploadFileName;
+
+    /**
      * @return mixed
      */
     public function getQuacks()
@@ -209,5 +215,17 @@ public function setIsVerified(bool $isVerified): self
 
     return $this;
 }
+
+    public function getUploadFileName(): ?string
+    {
+        return $this->uploadFileName;
+    }
+
+    public function setUploadFileName(?string $uploadFileName): self
+    {
+        $this->uploadFileName = $uploadFileName;
+
+        return $this;
+    }
 
 }

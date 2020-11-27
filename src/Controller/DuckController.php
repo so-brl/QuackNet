@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Duck;
 use App\Form\DuckType;
 use App\Repository\DuckRepository;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,15 +32,23 @@ class DuckController extends AbstractController
 
     /**
      * @Route("/new", name="duck_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param FileUploader $fileUploader
+     * @return Response
      */
-    public function new(Request $request,  UserPasswordEncoderInterface $passwordEncoder): Response
+    public function new(Request $request,  UserPasswordEncoderInterface $passwordEncoder, FileUploader $fileUploader): Response
     {
         $duck = new Duck();
         $form = $this->createForm(DuckType::class, $duck);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $duckPicture = $form->get('uploadFileName')->getData();
+            if ($duckPicture) {
+                $uploadFileName = $fileUploader->uploadDuckImage($duckPicture);
+                $duck->setUploadFileName($uploadFileName);
+            }
             $duck->setPassword(
                 $passwordEncoder->encodePassword(
                     $duck,
@@ -72,17 +81,33 @@ class DuckController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="duck_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Duck $duck
+     * @param FileUploader $fileUploader
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return Response
      */
-    public function edit(Request $request, Duck $duck): Response
+    public function edit(Request $request, Duck $duck,FileUploader $fileUploader,UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $this->denyAccessUnlessGranted('edit', $duck);
         $form = $this->createForm(DuckType::class, $duck);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $quackPicture = $form->get('uploadFileName')->getData();
+            if ($quackPicture) {
+                $uploadFileName = $fileUploader->uploadDuckImage($quackPicture);
+                $duck->setUploadFileName($uploadFileName);
+            }
+            $duck->setPassword(
+                $passwordEncoder->encodePassword(
+                    $duck,
+                    $form->get('password')->getData()
+                )
+            );
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('duck_index');
+            return $this->redirectToRoute('duck_show',array('id' => $duck->getId()));
         }
 
         return $this->render('duck/edit.html.twig', [

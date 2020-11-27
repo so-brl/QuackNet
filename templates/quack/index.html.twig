@@ -3,45 +3,60 @@
 {% block title %}Quack index{% endblock %}
 
 {% block content %}
-            <div class=" m-5">
-                <div class="d-flex flex-column">
-                    {% for quack in quacks |sort((a, b) => b.createdAt <=> a.createdAt) %}
-                        <div class="card  p-1">
-                            <div class="card-body m-1  ">
-                                <div class="d-flex justify-content-between">
+    <div class=" m-5">
+        <div class="d-flex flex-column">
+            {% for quack in quacks |sort((a, b) => b.createdAt <=> a.createdAt) %}
+                <div class="card  p-1 mb-5">
+                    <div class="card-body m-1  ">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between">
+                                <a class="text-center" href="/duck/{{ quack.Auteur.id }}"><img
+                                            class="profilPicturePost d-block user-select-none pb-3 pt-3"
+                                            src="/uploads/{{ quack.Auteur.uploadFileName }}"/></a>
+                                <div>
                                     <h4 class="card-title"> {{ quack.Auteur.duckname }}</h4>
                                     <small>{{ quack.createdAt ? quack.createdAt|date('d-m-y h:i:s') : '' }}</small>
                                 </div>
-                                <div class="d-flex justify-content-start">
-                                    <h6 class="card-subtitle mb-2 text-muted">Infos sur le Duck à implémenter</h6>
-                                </div>
-                                <div class="d-flex justify-content-start">
-                                    {% for tag in quack.tags %}
-                                        <a class="badge badge-pill badge-primary mr-1"
-                                           style="height: fit-content">{{ tag }}</a>
-                                    {% endfor %}
-                                </div>
+                            </div>
 
-                                <img class="d-block user-select-none pb-3 pt-3" width="100%" height="auto"
-                                     src="/uploads/{{ quack.uploadFileName }}">
-                                <p class="card-text"> {{ quack.content }}</p>
-                                <div class="d-flex justify-content-end">
-                                    <a href="{{ path('quack_show', {'id': quack.id}) }}" class="card-link">Lire le
-                                        Quack</a>
+                        </div>
+
+                        <div class="d-flex justify-content-start">
+                            {% for tag in quack.tags %}
+                                <a class="badge badge-pill badge-primary mr-1"
+                                   style="height: fit-content">{{ tag }}</a>
+                            {% endfor %}
+                        </div>
+                        <div class="d-flex flex-row flex-nowrap ">
+                            <img class="d-block user-select-none pb-3 pt-3" width="50%" height="50%"
+                                 src="/uploads/{{ quack.uploadFileName }}">
+                            <div>
+                                <p class="card-text m-3"> {{ quack.content | slice(0, 170) | raw }} ... </p>
+                                <div class="d-flex justify-content-end align-items-center">
+                                    <a href="{{ path('quack_show', {'id': quack.id}) }}" class="btn btn-secondary btn-sm">Lire
+                                        la
+                                        suite</a>
+                                    {% if is_granted('edit', quack) %}
+                                        <div class="d-flex justify-content-end ml-3">
+                                            <a class="btn-little" href="{{ path('quack_edit', {'id': quack.id}) }}"><i
+                                                        class="fas fa-pen-nib"></i></a>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
-                            {% if is_granted('edit', quack) %}
-                                <div class="d-flex justify-content-end">
-                                    <a class="" href="{{ path('quack_edit', {'id': quack.id}) }}">Modifier</a>
-                                </div>
-                            {% endif %}
+
                         </div>
-                    {% else %}
-                        <div>
-                            <p>no records found
-                            <p>
-                        </div>
-                    {% endfor %}
+
+
+                    </div>
+
                 </div>
-            </div>
+            {% else %}
+                <div>
+                    <p>no records found
+                    <p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

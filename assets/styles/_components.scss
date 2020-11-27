@@ -50,6 +50,19 @@ input {
   font-weight: unset;
 }
 
+.btn-secondary{
+  color: #fff;
+  background-color: black;
+}
+.btn-little{
+  color: black;
+  font-weight: unset;
+  border-radius: 100%;
+  &:hover{
+    color: #e1a4a9;
+
+  }
+}
 .navbar-brand {
   font-size: 1.5rem;
   font-weight: 900;
@@ -84,19 +97,23 @@ input {
     color: #e1a4a9;
     text-transform: initial;
   }
-}
 
+}
+small{
+  color: #e1a4a9 !important;
+  margin-top: -0.75rem;
+}
 .menuLeft {
   position: fixed;
   top: 5em;
-  left: 14%;
+  left: 8vw;
 
 }
 
 .menuRight {
   position: fixed;
   top: 5em;
-  right: 14%;
+  right: 8vw;
 
 }
 
@@ -106,6 +123,40 @@ input {
   padding: 3em;
 }
 
+.card{
+  border-radius:unset;
+}
+
+.profilPicture{
+  width: 100px;
+  height: auto;
+  border-radius: 100%;
+}
+.profilPicturePost{
+  @extend .profilPicture;
+  width: 50px;
+}
+.profilPictureNav{
+  @extend .profilPicture;
+  width: 35px;
+  &:hover{
+    border-radius: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+.btnProfilNav{
+  &:hover{
+    img
+    {
+      filter: grayscale(1);
+      -webkit-filter: grayscale(1);
+      -moz-filter: grayscale(1);
+      -o-filter: grayscale(1);
+      -ms-filter: grayscale(1);
+    }
+  }
+}
 .form-control {
   display: block;
   width: 100%;
