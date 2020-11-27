@@ -7,7 +7,11 @@
             <button class="ml-3 btn btn-primary btn-sm">Rechercher</button>
             {{ form_end(searchForm) }}
         </form>
+        {% if app.user %}
+            <a class=" mr-2 pr-5" href="/logout">Déconnexion</a>
+        {% else %}
         <a class=" mr-2 pr-2 " href="/" style="border-right: 1px solid gray">Connexion</a>
         <a class=" mr-2 " href="/">Inscription</a>
+        {% endif %}
     </div>
 </div>

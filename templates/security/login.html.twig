@@ -1,65 +1,51 @@
 {% extends 'base.html.twig' %}
+{% block title %}Connectez vous à Quacknet{% endblock %}
+{% block login %}
+    <div class="home container-fluid d-flex align-items-center  "
+         style="height: 100vh; background-image: url('{{ asset('build/quacknetBg.jpg') }}'); background-size: cover; background-repeat: no-repeat">
+        <div class="container cardCustom  d-flex flex-column align-items-center ">
+            <div class="d-flex flex-column home_identity justify-content-between align-items-center mt-4">
+                <h1 class="text-center">Quacknet</h1>
+                <h4>Connexion</h4>
+                <div class="d-flex justify-content-center">
+                    <form method="post" style="width: 320px">
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                        {% if app.user %}
+                            <div class="mb-3">
+                                Hey {{ app.user.username }}, tu es déjà connécté ! <a href="{{ path('app_logout') }}">Me
+                                    deconnecter</a>
+                            </div>
+                        {% endif %}
+                        <label for="inputUsername">Duckname</label>
+                        <input type="text" value="{{ last_username }}" name="username" id="inputUsername"
+                               class="form-control mb-3" required autofocus>
+                        <label for="inputPassword">Mot de passe</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control mb-3" required>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        {#    #}{##}
+                        {#        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.#}
+                        {#        See https://symfony.com/doc/current/security/remember_me.html#}
 
-{% block title %}Log in!{% endblock %}
-
-{% block body %}
-<div class="container " >
-    <div class="home container-fluid d-flex align-items-center  " >
-        <div class="container mt-5" >
-            <div class=" d-flex flex-column home_identity justify-content-center align-items-center mt-5">
-                <div class="text-center">
-                    <h3 class="home_identity" ><a href="/"><img class="home_identity_logo " src="{{ asset('build/quacknet-maj-logo.svg') }}" alt="quacknet-logo"></a></h3>
-                    <p class="home_identity">A votre tour de cancaner<span>*</span> dans la marre.</p>
-
+                        {#            <div class="checkbox mb-3 mt-2">#}
+                        {#                <label>#}
+                        {#                    <input type="checkbox" name="_remember_me"> Se rappeler de moi#}
+                        {#                </label>#}
+                        {#            </div>#}
+                        {#    #}
+                        <button class="btn btn-primary mb-5 mt-3" type="submit" style="width: 100%; ">
+                            Connexion
+                        </button>
+                    </form>
                 </div>
+                <p class="text-center">
+                    <small>* Faire courir des bruits de couloir et des bavardages malveillants. <br>Médire de quelqu'un
+                        en
+                        colportant des propos négatifs dans l'intention de nuire. <br>Expression synonyme de babiller ou
+                        jaser appartenant au langage familier. </small>
+                </p>
             </div>
-
         </div>
-
     </div>
-    <div  class="d-flex justify-content-center">
-        <form method="post" style="width: 320px">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
-
-            {% if app.user %}
-                <div class="mb-3">
-                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-                </div>
-            {% endif %}
-
-            <h1 class="text-center mt-5 mb-5 yellow-text">Connexion</h1>
-            <label for="inputUsername">Duckname</label>
-            <input  type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control mb-3" required autofocus>
-            <label for="inputPassword">Mode de passe</label>
-            <input type="password" name="password" id="inputPassword" class="form-control mb-3" required>
-
-            <input type="hidden" name="_csrf_token"
-                   value="{{ csrf_token('authenticate') }}"
-            >
-
-            {#    #}{##}
-            {#        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.#}
-            {#        See https://symfony.com/doc/current/security/remember_me.html#}
-
-{#            <div class="checkbox mb-3 mt-2">#}
-{#                <label>#}
-{#                    <input type="checkbox" name="_remember_me"> Se rappeler de moi#}
-{#                </label>#}
-{#            </div>#}
-            {#    #}
-
-            <button class="btn btn-primary mb-5 mt-3" type="submit" style="width: 100%; ">
-                Connexion
-            </button>
-        </form>
-    </div>
-
-    <p class="text-center mb-5">
-        <small>* Faire courir des bruits de couloir et des bavardages malveillants. <br>Médire de quelqu'un en
-            colportant des propos négatifs dans l'intention de nuire. <br>Expression synonyme de babiller ou
-            jaser appartenant au langage familier. </small>
-    </p>
-</div>
 {% endblock %}
