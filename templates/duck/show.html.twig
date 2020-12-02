@@ -16,7 +16,6 @@
                                      <small>Inscrit depuis le 00:00:00</small>
                                  </div>
                              </div>
-
                              {% if is_granted('edit', duck) %}
                                  <div class="d-flex justify-content-end">
                                      <a class="btn btn-secondary btn-sm" href="{{ path('duck_edit', {'id':  duck.id}) }}">Modifier</a>

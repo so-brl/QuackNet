@@ -3,16 +3,17 @@
 {% block title %}Duck index{% endblock %}
 
  {% block content %}
-    <h1>Duck index</h1>
+<div class=" m-5">
+    <h1>Liste des Duck</h1>
 
-    <table class="table">
+    <table class="table ">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
+                <th>Photo</th>
+                <th>Prénom</th>
+                <th>Nom</th>
                 <th>Duckname</th>
-                <th>Email</th>
+
 {#                <th>Password</th>#}
 {#                <th>Roles</th>#}
                 <th>actions</th>
@@ -20,20 +21,24 @@
         </thead>
         <tbody>
         {% for duck in ducks %}
+            {% if  duck.firstname != "admin" %}
             <tr class="col-5">
                 <td><img class="d-block user-select-none pb-3 pt-3" width="50px" height="auto"
                          src="/uploads/{{ duck.uploadFileName }}"/></td>
                 <td>{{ duck.firstname }}</td>
                 <td>{{ duck.lastname }}</td>
                 <td>{{ duck.duckname }}</td>
-                <td>{{ duck.email }}</td>
+
 {#                <td>{{ duck.password }}</td>#}
 {#                <td>{{ duck.roles ? duck.roles|json_encode : '' }}</td>#}
                 <td>
-                    <a href="{{ path('duck_show', {'id': duck.id}) }}">show</a>
-                    <a href="{{ path('duck_edit', {'id': duck.id}) }}">edit</a>
+                    {% if app.user.duckname == duck.duckname %}
+                    <a href="{{ path('duck_show', {'id': duck.id}) }}">Voir</a>
+                    <a href="{{ path('duck_edit', {'id': duck.id}) }}">Modifier</a>
+                    {% endif %}
                 </td>
             </tr>
+            {% endif %}
         {% else %}
             <tr>
                 <td colspan="8">no records found</td>
@@ -42,5 +47,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('duck_new') }}">Create new</a>
+{#    <a class=" btn btn-secondary" href="{{ path('duck_new') }}">Ajouter un Duck</a>#}
+</div>
 {% endblock %}
